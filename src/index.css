@@ -1,0 +1,194 @@
+:root {
+  /* Color Palette - Light Mode (Default) */
+  --color-background: #FAFAFA;
+  /* Lightened from #F2F2EB */
+  /* Soft beige/white */
+  --color-text: #1A1A1A;
+  /* Dark gray/black */
+  --color-primary: #D4AF37;
+  /* Gold */
+  --color-accent: #F3E5DC;
+  /* Soft pink/champagne */
+  --color-secondary: #8C8C8C;
+  /* Muted gray */
+  --color-white: #FFFFFF;
+  --color-card-bg: #FFFFFF;
+  --color-border: rgba(0, 0, 0, 0.05);
+  --color-input-bg: transparent;
+
+  /* Typography */
+  --font-serif: 'Playfair Display', serif;
+  --font-sans: 'Lato', sans-serif;
+
+  /* Spacing */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 2rem;
+  --spacing-lg: 4rem;
+  --spacing-xl: 8rem;
+
+  /* Transitions */
+  --transition-smooth: all 0.3s ease-in-out;
+}
+
+/* Global Select Option Styles */
+select option {
+  background-color: var(--color-card-bg);
+  color: var(--color-text);
+}
+
+[data-theme="dark"] {
+  --color-background: #121212;
+  /* Very dark gray */
+  --color-text: #EAEAEA;
+  /* Off-white */
+  --color-primary: #D4AF37;
+  /* Gold remains the same */
+  --color-accent: #2A2A2A;
+  /* Darker accent */
+  --color-secondary: #A0A0A0;
+  /* Lighter gray for secondary text */
+  --color-white: #1E1E1E;
+  /* Dark card background */
+  --color-card-bg: #1E1E1E;
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-input-bg: rgba(255, 255, 255, 0.05);
+}
+
+/* Ensure SVGs inherit color properly */
+svg {
+  color: inherit;
+}
+
+/* SVG paths should inherit stroke color and have no fill by default */
+svg path,
+svg line,
+svg polyline,
+svg polygon,
+svg circle,
+svg rect {
+  stroke: currentColor;
+}
+
+/* Light mode: icons should be black/dark */
+svg {
+  color: var(--color-text);
+}
+
+/* Dark mode: icons should be light gray/white */
+[data-theme="dark"] svg {
+  color: var(--color-text);
+}
+
+/* Ensure search icons are properly colored */
+.search-icon,
+.no-results-icon {
+  color: var(--color-secondary);
+}
+
+[data-theme="dark"] .search-icon,
+[data-theme="dark"] .no-results-icon {
+  color: var(--color-secondary);
+}
+
+/* Reset & Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-background);
+  color: var(--color-text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  margin-bottom: var(--spacing-sm);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: var(--transition-smooth);
+}
+
+button {
+  font-family: var(--font-sans);
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Utility Classes */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-sm);
+}
+
+.section {
+  padding: var(--spacing-lg) 0;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 28px;
+  border: 1px solid var(--color-text);
+  background-color: transparent;
+  color: var(--color-text);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: var(--transition-smooth);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background-color: var(--color-text);
+  color: var(--color-background);
+  transform: translateY(-2px);
+}
+
+.btn-primary {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary);
+  color: #000000;
+  /* Black text for better contrast/clarity */
+  border-color: var(--color-primary);
+  /* Removed glow (box-shadow) */
+}
+
+/* Dark mode adjustments for buttons */
+[data-theme="dark"] .btn:hover {
+  color: var(--color-background);
+  /* Ensure contrast on hover */
+}
+
+[data-theme="dark"] .btn-primary:hover {
+  color: #000000;
+  /* Black text on gold for better contrast in dark mode */
+}
