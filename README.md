@@ -1,19 +1,87 @@
-# React + Vite
+## 🛍️ Bijoux E-Commerce Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive jewelry e-commerce website built with **React and Vite**.
+The platform allows users to explore jewelry collections, contact the business, and place orders easily via WhatsApp.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Features
 
-## React Compiler
+* Responsive design (desktop & mobile)
+* Multilingual support (EN / FR / AR)
+* RTL support for Arabic
+* WhatsApp integration with context-aware messages
+* Contact page with:
+  * Address
+  * Phone number
+  * Email
+  * Google Map location
+  * Opening hours
+* Clean and modern UI
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 📍 Business Information
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-# bijoux-ecommerce
-# bijoux
-# bijoux
+**Location:**
+N 10, Ground Floor, Kissariat Timizar
+1 Place El Mechouar
+Tiznit 85000, Morocco
+
+**Contact:**
+📞 Phone: +212 652 864 068
+📧 Email: [youssefnajmi890@gmail.com](mailto:youssefnajmi890@gmail.com)
+
+---
+
+## ⚙️ Tech Stack
+
+* React
+* Vite
+* JavaScript
+* CSS
+* i18next (for translations)
+
+---
+
+## 🚀 Getting Started
+
+```bash
+npm install
+npm run dev
+```
+
+Open:
+
+```
+http://localhost:5173
+```
+
+---
+
+## 🌍 Internationalization
+
+The website supports multiple languages:
+
+* English
+* French
+* Arabic (RTL)
+
+Language switching updates all content dynamically.
+
+---
+
+## 📦 Deployment
+
+```bash
+npm run build
+```
+
+The production build will be generated in the `dist/` folder.
+
+---
+
+## 👤 Author
+
+**Youssef**
+Jewelry E-commerce Project
