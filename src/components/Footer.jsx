@@ -57,7 +57,12 @@ const Footer = () => {
           </div>
         </div>
         <div className="footer-bottom">
-          <p>&copy; {new Date().getFullYear()} BIJOUX. {t('footer.rights')}</p>
+          <p>
+            &copy; {new Date().getFullYear()} BIJOUX. {t('footer.rights')}
+            <span className="hidden-mobile"> – </span>
+            <br className="mobile-only" />
+            Created by <a href="https://github.com/You-ssef-dev" target="_blank" rel="noopener noreferrer" className="author-link">You-ssef-dev</a>
+          </p>
         </div>
       </div>
 
@@ -140,6 +145,31 @@ const Footer = () => {
           border-top: 1px solid rgba(0,0,0,0.05);
           color: var(--color-secondary);
           font-size: 0.8rem;
+          line-height: 1.6;
+        }
+
+        .author-link {
+          color: var(--color-text);
+          font-weight: 500;
+          text-decoration: none;
+          transition: color 0.3s;
+        }
+
+        .author-link:hover {
+          color: var(--color-primary);
+        }
+
+        .mobile-only {
+          display: none;
+        }
+
+        @media (max-width: 768px) {
+          .hidden-mobile {
+            display: none;
+          }
+          .mobile-only {
+            display: block;
+          }
         }
       `}</style>
     </footer>
