@@ -8,112 +8,119 @@ import SEO from '../components/SEO';
 const collectionsData = [
     {
         id: 'minimalist',
-        title: 'Minimalist',
-        description: 'Clean lines and understated elegance for the modern woman.',
-        image: '/images/bracelets/gold/minimalist-gold-choker.jpg' // Minimalist Gold Choker
+        title: { en: 'Minimalist', ar: 'بسيط', fr: 'Minimaliste' },
+        description: { en: 'Clean lines and understated elegance for the modern woman.', ar: 'خطوط نظيفة وأناقة هادئة للمرأة العصرية.', fr: 'Lignes épurées et élégance discrète pour la femme moderne.' },
+        image: '/images/bracelets/gold/minimalist-gold-choker.jpg'
     },
     {
         id: 'vintage',
-        title: 'Vintage',
-        description: 'Timeless treasures inspired by eras past.',
-        image: '/images/necklaces/gold/vintage-gold-chain.jpg' // Vintage Gold Chain
+        title: { en: 'Vintage', ar: 'عتيق', fr: 'Vintage' },
+        description: { en: 'Timeless treasures inspired by eras past.', ar: 'كنوز خالدة مستوحاة من العصور الماضية.', fr: 'Trésors intemporels inspirés des époques passées.' },
+        image: '/images/necklaces/gold/vintage-gold-chain.jpg'
     },
     {
         id: 'bridal',
-        title: 'Bridal',
-        description: 'Exquisite pieces for your special day.',
-        image: '/images/rings/silver/diamond-ring.jpg' // Diamond Solitaire
+        title: { en: 'Bridal', ar: 'زفاف', fr: 'Mariage' },
+        description: { en: 'Exquisite pieces for your special day.', ar: 'قطع رائعة ليومك الخاص.', fr: 'Des pièces exquises pour votre jour spécial.' },
+        image: '/images/rings/silver/diamond-ring.jpg'
     },
     {
         id: 'gold',
-        title: 'Gold Essentials',
-        description: 'The warm glow of 18k gold, a staple for every collection.',
-        image: '/images/earrings/gold/gold-hoops.jpg' // Modern Gold Hoops
+        title: { en: 'Gold Essentials', ar: 'أساسيات الذهب', fr: 'Essentiels en Or' },
+        description: { en: 'The warm glow of 18k gold, a staple for every collection.', ar: 'التوهج الدافئ للذهب عيار 18 قيراط، عنصر أساسي لكل مجموعة.', fr: 'La lueur chaude de l\'or 18 carats, un incontournable pour chaque collection.' },
+        image: '/images/earrings/gold/gold-hoops.jpg'
     },
     {
         id: 'silver',
-        title: 'Sterling Silver',
-        description: 'Cool, crisp, and versatile sterling silver pieces.',
-        image: '/images/bracelets/silver/silver-cuff.jpg' // Vintage Silver Cuff
+        title: { en: 'Sterling Silver', ar: 'فضة استرليني', fr: 'Argent Sterling' },
+        description: { en: 'Cool, crisp, and versatile sterling silver pieces.', ar: 'قطع فضة استرليني باردة ونقية ومتعددة الاستخدامات.', fr: 'Pièces en argent sterling fraîches, nettes et polyvalentes.' },
+        image: '/images/bracelets/silver/silver-cuff.jpg'
     },
     {
         id: 'pearl',
-        title: 'Pearl Collection',
-        description: 'The organic beauty of freshwater pearls.',
-        image: '/images/earrings/gold/pearl-earrings.jpg' // Pearl Drop Earrings
+        title: { en: 'Pearl Collection', ar: 'مجموعة اللؤلؤ', fr: 'Collection Perle' },
+        description: { en: 'The organic beauty of freshwater pearls.', ar: 'الجمال العضوي للآلئ المياه العذبة.', fr: 'La beauté organique des perles d\'eau douce.' },
+        image: '/images/earrings/gold/pearl-earrings.jpg'
     },
     {
         id: 'bestsellers',
-        title: 'Best Sellers',
-        description: 'Our most loved and highly rated pieces, chosen by you.',
-        image: '/images/necklaces/gold/gold-necklace.jpg' // Ethereal Gold Necklace (Top bestseller)
+        title: { en: 'Best Sellers', ar: 'الأكثر مبيعاً', fr: 'Meilleures Ventes' },
+        description: { en: 'Our most loved and highly rated pieces, chosen by you.', ar: 'قطعنا الأكثر حباً وتقييماً عالياً، من اختيارك.', fr: 'Nos pièces les plus aimées et les mieux notées, choisies par vous.' },
+        image: '/images/necklaces/gold/gold-necklace.jpg'
     },
     {
         id: 'new',
-        title: 'New Arrivals',
-        description: 'The latest additions to our curated collection.',
-        image: '/images/earrings/gold/classic-pearl-studs.jpg' // New Arrivals (temp placeholder)
+        title: { en: 'New Arrivals', ar: 'وصل حديثاً', fr: 'Nouveautés' },
+        description: { en: 'The latest additions to our curated collection.', ar: 'أحدث الإضافات إلى مجموعتنا المختارة.', fr: 'Les derniers ajouts à notre collection.' },
+        image: '/images/earrings/gold/classic-pearl-studs.jpg'
     },
     {
         id: 'gold-rings',
-        title: 'Gold Rings',
-        description: 'Elegant gold rings for every occasion.',
+        title: { en: 'Gold Rings', ar: 'خواتم ذهب', fr: 'Bagues en Or' },
+        description: { en: 'Elegant gold rings for every occasion.', ar: 'خواتم ذهبية أنيقة لكل مناسبة.', fr: 'Bagues en or élégantes pour toutes les occasions.' },
         image: '/images/rings/gold/gold-ring-1.jpg'
     },
     {
         id: 'gold-necklaces',
-        title: 'Gold Necklaces',
-        description: 'Stunning gold necklaces to elevate your style.',
+        title: { en: 'Gold Necklaces', ar: 'قلائد ذهب', fr: 'Colliers en Or' },
+        description: { en: 'Stunning gold necklaces to elevate your style.', ar: 'قلائد ذهبية مذهلة لرفع مستوى أناقتك.', fr: 'Colliers en or époustouflants pour rehausser votre style.' },
         image: '/images/necklaces/gold/gold-necklace-1.jpg'
     },
     {
         id: 'gold-earrings',
-        title: 'Gold Earrings',
-        description: 'Classic and modern gold earrings.',
+        title: { en: 'Gold Earrings', ar: 'أقراط ذهب', fr: 'Boucles d\'oreilles en Or' },
+        description: { en: 'Classic and modern gold earrings.', ar: 'أقراط ذهبية كلاسيكية وعصرية.', fr: 'Boucles d\'oreilles en or classiques et modernes.' },
         image: '/images/earrings/gold/gold-hoops.jpg'
     },
     {
         id: 'gold-bracelets',
-        title: 'Gold Bracelets',
-        description: 'Luxurious gold bracelets.',
+        title: { en: 'Gold Bracelets', ar: 'أساور ذهب', fr: 'Bracelets en Or' },
+        description: { en: 'Luxurious gold bracelets.', ar: 'أساور ذهبية فاخرة.', fr: 'Bracelets en or luxueux.' },
         image: '/images/bracelets/gold/minimalist-gold-choker.jpg'
     },
     {
         id: 'silver-rings',
-        title: 'Silver Rings',
-        description: 'Contemporary silver rings.',
+        title: { en: 'Silver Rings', ar: 'خواتم فضة', fr: 'Bagues en Argent' },
+        description: { en: 'Contemporary silver rings.', ar: 'خواتم فضة معاصرة.', fr: 'Bagues en argent contemporaines.' },
         image: '/images/rings/silver/silver-ring-1.jpg'
     },
     {
         id: 'silver-necklaces',
-        title: 'Silver Necklaces',
-        description: 'Timeless silver necklaces.',
+        title: { en: 'Silver Necklaces', ar: 'قلائد فضة', fr: 'Colliers en Argent' },
+        description: { en: 'Timeless silver necklaces.', ar: 'قلائد فضة خالدة.', fr: 'Colliers en argent intemporels.' },
         image: '/images/bracelets/silver/silver-cuff.jpg'
     },
     {
         id: 'silver-earrings',
-        title: 'Silver Earrings',
-        description: 'Elegant silver earrings.',
+        title: { en: 'Silver Earrings', ar: 'أقراط فضة', fr: 'Boucles d\'oreilles en Argent' },
+        description: { en: 'Elegant silver earrings.', ar: 'أقراط فضة أنيقة.', fr: 'Boucles d\'oreilles en argent élégantes.' },
         image: '/images/earrings/gold/pearl-earrings.jpg'
     },
     {
         id: 'silver-bracelets',
-        title: 'Silver Bracelets',
-        description: 'Stylish silver bracelets.',
+        title: { en: 'Silver Bracelets', ar: 'أساور فضة', fr: 'Bracelets en Argent' },
+        description: { en: 'Stylish silver bracelets.', ar: 'أساور فضة أنيقة.', fr: 'Bracelets en argent élégants.' },
         image: '/images/bracelets/silver/silver-cuff.jpg'
     }
 ];
 
+import { useTranslation } from 'react-i18next';
+
 const Collections = () => {
     const { category } = useParams();
+    const { t, i18n } = useTranslation();
+    const currentLang = i18n.language;
 
     if (category) {
         // Detail View: Show products in this collection
         const collectionInfo = collectionsData.find(c => c.id === category) || {
-            title: category.charAt(0).toUpperCase() + category.slice(1),
-            description: `Explore our ${category} collection.`,
+            title: { en: category.charAt(0).toUpperCase() + category.slice(1), ar: category, fr: category },
+            description: { en: `Explore our ${category} collection.`, ar: `استكشف مجموعة ${category}.`, fr: `Découvrez notre collection ${category}.` },
             image: '/images/hero.jpg'
         };
+
+        const title = collectionInfo.title[currentLang] || collectionInfo.title['en'];
+        const description = collectionInfo.description[currentLang] || collectionInfo.description['en'];
 
         const collectionProducts = products.filter(p =>
             p.collections && p.collections.includes(category)
@@ -124,13 +131,13 @@ const Collections = () => {
         return (
             <div className="page collection-detail-page">
                 <SEO
-                    title={`${collectionInfo.title} | Bijoux Collections`}
-                    description={collectionInfo.description}
+                    title={`${title} | Bijoux Collections`}
+                    description={description}
                 />
 
                 <div className="collection-hero">
                     <div className="collection-hero-image-container">
-                        <img src={collectionInfo.image} alt={collectionInfo.title} className="collection-hero-image" />
+                        <img src={collectionInfo.image} alt={title} className="collection-hero-image" />
                         {!isCleanHero && <div className="overlay"></div>}
                     </div>
                     {!isCleanHero && (
@@ -140,14 +147,14 @@ const Collections = () => {
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.8 }}
                             >
-                                {collectionInfo.title}
+                                {title}
                             </motion.h1>
                             <motion.p
                                 initial={{ opacity: 0, y: 30 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.8, delay: 0.2 }}
                             >
-                                {collectionInfo.description}
+                                {description}
                             </motion.p>
                         </div>
                     )}
@@ -162,8 +169,8 @@ const Collections = () => {
                         </div>
                     ) : (
                         <div className="empty-collection">
-                            <p>No products found in this collection.</p>
-                            <Link to="/collections" className="btn btn-primary">View All Collections</Link>
+                            <p>{t('collections.empty')}</p>
+                            <Link to="/collections" className="btn btn-primary">{t('collections.view_all')}</Link>
                         </div>
                     )}
                 </div>
@@ -253,8 +260,8 @@ const Collections = () => {
 
             <div className="container section">
                 <div className="collections-header">
-                    <h1>Our Collections</h1>
-                    <p>Curated selections for every style and occasion.</p>
+                    <h1>{t('collections.title')}</h1>
+                    <p>{t('collections.subtitle')}</p>
                 </div>
 
                 <div className="collections-grid">
@@ -265,10 +272,10 @@ const Collections = () => {
                                 whileHover={{ scale: 1.02 }}
                                 transition={{ duration: 0.5 }}
                             >
-                                <img src={collection.image} alt={collection.title} className="collection-card-image" />
+                                <img src={collection.image} alt={collection.title[currentLang] || collection.title['en']} className="collection-card-image" />
                                 <div className="collection-card-overlay">
-                                    <h2>{collection.title}</h2>
-                                    <span className="explore-link">Explore &rarr;</span>
+                                    <h2>{collection.title[currentLang] || collection.title['en']}</h2>
+                                    <span className="explore-link">{t('common.explore')} &rarr;</span>
                                 </div>
                             </motion.div>
                         </Link>

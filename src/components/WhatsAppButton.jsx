@@ -1,13 +1,17 @@
 import React from 'react';
 import { MessageCircle } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+import { getWhatsAppUrl } from '../utils/whatsapp';
 
-const WhatsAppButton = ({
-  phoneNumber = "1234567890",
-  message = "Hello! I'd like to place an order.",
-  label = "Order via WhatsApp",
-  className = ""
-}) => {
-  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+const WhatsAppButton = ({ variant = 'default', label, isFloating = false, className = '', context = '' }) => {
+  const { t } = useTranslation();
+
+  // Determine context: provided context OR default "we clicked the [label] button"
+  const buttonLabel = label || t('home.whatsapp_cta');
+  const finalContext = context || t('common.whatsapp_context_default', { label: buttonLabel });
+
+  // Use the global utility to ensure consistent message and number
+  const whatsappUrl = getWhatsAppUrl(finalContext);
 
   return (
     <>
@@ -15,13 +19,40 @@ const WhatsAppButton = ({
         href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className={`whatsapp-btn ${className}`}
-        aria-label={label}
+        className={`${isFloating ? 'whatsapp-float' : 'whatsapp-btn'} ${className}`}
+        aria-label="Chat on WhatsApp"
       >
-        <MessageCircle size={20} className="whatsapp-icon" />
-        <span>{label}</span>
+        <MessageCircle size={isFloating ? 32 : 20} className={!isFloating ? "whatsapp-icon" : ""} />
+        {!isFloating && <span>{buttonLabel}</span>}
       </a>
       <style>{`
+        .whatsapp-float {
+          position: fixed;
+          bottom: 20px;
+          right: 20px;
+          background-color: #25D366;
+          color: white;
+          border-radius: 50%;
+          width: 60px;
+          height: 60px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+          z-index: 1000;
+          transition: transform 0.3s ease, background-color 0.3s ease;
+          text-decoration: none;
+        }
+
+        .whatsapp-float:hover {
+          transform: scale(1.05);
+          background-color: #1DA851;
+        }
+
+        .whatsapp-float svg {
+          fill: white;
+        }
+
         .whatsapp-btn {
           display: inline-flex;
           align-items: center;
@@ -41,11 +72,10 @@ const WhatsAppButton = ({
           transition: all 0.3s ease-in-out;
           position: relative;
           overflow: hidden;
-          width: 100%; /* Responsive: full width on small screens if needed, or controlled by container */
-          max-width: 300px; /* Prevent it from being too wide */
+          width: 100%;
+          max-width: 300px;
         }
 
-        /* Dark Mode Adjustment */
         [data-theme="dark"] .whatsapp-btn {
            color: var(--color-primary);
            border-color: var(--color-primary);
@@ -53,9 +83,8 @@ const WhatsAppButton = ({
 
         .whatsapp-btn:hover {
           background-color: var(--color-primary);
-          color: #000000; /* Black text for clarity */
+          color: #000000;
           transform: translateY(-2px);
-          /* Removed box-shadow glow */
         }
 
         [data-theme="dark"] .whatsapp-btn:hover {
@@ -76,7 +105,7 @@ const WhatsAppButton = ({
         
         @media (min-width: 768px) {
             .whatsapp-btn {
-                width: auto; /* Auto width on desktop */
+                width: auto;
             }
         }
       `}</style>

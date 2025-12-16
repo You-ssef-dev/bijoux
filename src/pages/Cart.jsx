@@ -3,16 +3,33 @@ import { useCart } from '../context/CartContext';
 import { Trash2, Minus, Plus, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
+import { useTranslation } from 'react-i18next';
+import { openWhatsApp } from '../utils/whatsapp';
+
 const Cart = () => {
   const { cart, removeFromCart, updateQuantity, cartTotal } = useCart();
+  const { t, i18n } = useTranslation();
+  const currentLang = i18n.language;
+
+  const handleWhatsAppOrder = () => {
+    // Construct the items list string
+    const itemsList = cart.map(item => `- ${item.name[currentLang] || item.name['en'] || item.name} (x${item.quantity}): $${(item.price * item.quantity).toLocaleString()}`).join('\n');
+    const total = `$${cartTotal.toLocaleString()}`;
+
+    // Get the message from translation which should start with "Hello Youssef, we want ..."
+    // We pass this specific message to the openWhatsApp utility.
+    // The utility will encode it and append it to the base URL.
+    const message = t('cart.whatsapp_message', { items: itemsList, total: total });
+    openWhatsApp(message);
+  };
 
   if (cart.length === 0) {
     return (
       <div className="page cart-page empty-cart">
         <div className="container section">
-          <h1>Your Cart</h1>
-          <p>Your shopping bag is empty.</p>
-          <Link to="/shop" className="btn btn-primary">Continue Shopping</Link>
+          <h1>{t('cart.your_cart')}</h1>
+          <p>{t('cart.empty_message')}</p>
+          <Link to="/shop" className="btn btn-primary">{t('cart.continue_shopping')}</Link>
         </div>
         <style>{`
             .empty-cart {
@@ -31,26 +48,26 @@ const Cart = () => {
   return (
     <div className="page cart-page">
       <div className="container section">
-        <h1>Your Cart</h1>
+        <h1>{t('cart.your_cart')}</h1>
 
         <div className="cart-layout">
           <div className="cart-items">
             <div className="cart-header">
-              <span>Product</span>
-              <span>Quantity</span>
-              <span>Total</span>
+              <span>{t('cart.product')}</span>
+              <span>{t('cart.quantity')}</span>
+              <span>{t('cart.total')}</span>
             </div>
             {cart.map(item => (
               <div key={item.id} className="cart-item">
                 <div className="item-info">
                   <div className="item-image-container">
-                    {item.image && <img src={item.image} alt={item.name} className="item-image" />}
+                    {item.image && <img src={item.image} alt={item.name[currentLang] || item.name['en'] || item.name} className="item-image" />}
                   </div>
                   <div className="item-details">
-                    <h3>{item.name}</h3>
+                    <h3>{item.name[currentLang] || item.name['en'] || item.name}</h3>
                     <p className="item-price">${item.price.toLocaleString()}</p>
                     <button className="remove-btn" onClick={() => removeFromCart(item.id)}>
-                      <Trash2 size={16} /> Remove
+                      <Trash2 size={16} /> {t('cart.remove')}
                     </button>
                   </div>
                 </div>
@@ -69,29 +86,24 @@ const Cart = () => {
           </div>
 
           <div className="cart-summary">
-            <h2>Order Summary</h2>
+            <h2>{t('cart.order_summary')}</h2>
             <div className="summary-row">
-              <span>Subtotal</span>
+              <span>{t('cart.subtotal')}</span>
               <span>${cartTotal.toLocaleString()}</span>
             </div>
             <div className="summary-row">
-              <span>Shipping</span>
-              <span>Calculated at checkout</span>
+              <span>{t('cart.shipping')}</span>
+              <span>{t('cart.calculated_at_checkout')}</span>
             </div>
             <div className="summary-row total">
-              <span>Total</span>
+              <span>{t('cart.total')}</span>
               <span>${cartTotal.toLocaleString()}</span>
             </div>
-            <button className="btn btn-primary checkout-btn" onClick={() => {
-              const message = `Hello Bijoux, I would like to place an order:\n\n${cart.map(item => `- ${item.name} (x${item.quantity}): $${(item.price * item.quantity).toLocaleString()}`).join('\n')}\n\nTotal: $${cartTotal.toLocaleString()}\n\nPlease confirm availability and shipping details.`;
-              const encodedMessage = encodeURIComponent(message);
-              window.open(`https://wa.me/15551234567?text=${encodedMessage}`, '_blank');
-            }}>
-              Order on WhatsApp <ArrowRight size={16} />
+            <button className="btn btn-primary checkout-btn" onClick={handleWhatsAppOrder}>
+              {t('cart.order_on_whatsapp')} <ArrowRight size={16} />
             </button>
             <div className="payment-badges">
-              {/* Placeholder for payment icons */}
-              <span>Secure Checkout</span>
+              <span>{t('cart.secure_checkout')}</span>
             </div>
           </div>
         </div>

@@ -1,0 +1,257 @@
+/* RTL (Right-to-Left) Support for Arabic */
+
+/* Global RTL adjustments */
+[dir="rtl"] {
+  direction: rtl;
+  text-align: right;
+}
+
+/* Flip icons and arrows for RTL */
+[dir="rtl"] .chevron-right,
+[dir="rtl"] .arrow-right,
+[dir="rtl"] svg[class*="chevron"],
+[dir="rtl"] svg[class*="arrow"] {
+  transform: scaleX(-1);
+}
+
+/* Navigation adjustments */
+[dir="rtl"] .nav-links {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .nav-link {
+  margin-left: 2rem;
+  margin-right: 0;
+}
+
+/* Language switcher positioning */
+[dir="rtl"] .language-switcher {
+  left: 1rem;
+  right: auto;
+}
+
+/* Cart icon positioning */
+[dir="rtl"] .cart-icon {
+  margin-left: 0;
+  margin-right: 1rem;
+}
+
+/* Search icon positioning */
+[dir="rtl"] .search-icon {
+  left: auto;
+  right: 1.5rem;
+}
+
+[dir="rtl"] .search-input {
+  padding-left: 1.5rem;
+  padding-right: 4rem;
+}
+
+/* Buttons and CTAs */
+[dir="rtl"] .btn svg {
+  margin-left: 0;
+  margin-right: 0.5rem;
+}
+
+/* Product cards */
+[dir="rtl"] .product-card {
+  text-align: right;
+}
+
+/* Product details */
+[dir="rtl"] .product-details-grid {
+  direction: rtl;
+}
+
+[dir="rtl"] .product-gallery {
+  margin-left: 0;
+  margin-right: 2rem;
+}
+
+/* Cart layout */
+[dir="rtl"] .cart-layout {
+  direction: rtl;
+}
+
+[dir="rtl"] .cart-header {
+  text-align: right;
+}
+
+[dir="rtl"] .item-info {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .item-image-container {
+  margin-left: 1rem;
+  margin-right: 0;
+}
+
+/* Filters sidebar */
+[dir="rtl"] .filters-sidebar {
+  text-align: right;
+}
+
+[dir="rtl"] .filter-group ul {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Footer adjustments */
+[dir="rtl"] .footer-content {
+  direction: rtl;
+}
+
+[dir="rtl"] .footer-section {
+  text-align: right;
+}
+
+/* Form inputs */
+[dir="rtl"] input,
+[dir="rtl"] textarea,
+[dir="rtl"] select {
+  text-align: right;
+}
+
+/* Quantity selector */
+[dir="rtl"] .quantity-selector {
+  flex-direction: row-reverse;
+}
+
+/* Carousel controls */
+[dir="rtl"] .carousel-controls {
+  flex-direction: row-reverse;
+}
+
+/* WhatsApp button (floating) */
+[dir="rtl"] .whatsapp-float {
+  left: 20px;
+  right: auto;
+}
+
+/* Collections grid */
+[dir="rtl"] .collections-grid {
+  direction: rtl;
+}
+
+/* Breadcrumbs */
+[dir="rtl"] .breadcrumb {
+  direction: rtl;
+}
+
+[dir="rtl"] .breadcrumb-separator {
+  transform: scaleX(-1);
+}
+
+/* Modal and overlay positioning */
+[dir="rtl"] .modal-close {
+  left: 1rem;
+  right: auto;
+}
+
+/* Dropdown menus */
+[dir="rtl"] .dropdown-menu {
+  left: auto;
+  right: 0;
+}
+
+/* Badge positioning */
+[dir="rtl"] .badge {
+  left: auto;
+  right: 1rem;
+}
+
+[dir="rtl"] .bestseller-badge {
+  left: auto;
+  right: 1rem;
+}
+
+/* Notification positioning */
+[dir="rtl"] .notification {
+  left: 1rem;
+  right: auto;
+}
+
+/* Responsive adjustments for RTL */
+@media (max-width: 768px) {
+  [dir="rtl"] .nav-links {
+    align-items: flex-end;
+  }
+
+  [dir="rtl"] .mobile-menu {
+    left: 0;
+    right: auto;
+  }
+}
+
+/* Text alignment for specific elements */
+[dir="rtl"] .section-title,
+[dir="rtl"] .page-title {
+  text-align: center; /* Keep centered titles centered */
+}
+
+[dir="rtl"] .product-description,
+[dir="rtl"] .product-meta {
+  text-align: right;
+}
+
+/* List items */
+[dir="rtl"] ul,
+[dir="rtl"] ol {
+  padding-left: 0;
+  padding-right: 1.5rem;
+}
+
+/* Flex layouts */
+[dir="rtl"] .flex-row {
+  flex-direction: row-reverse;
+}
+
+/* Grid layouts - maintain visual order */
+[dir="rtl"] .product-grid,
+[dir="rtl"] .results-grid {
+  direction: rtl;
+}
+
+/* Ensure images don't flip */
+[dir="rtl"] img {
+  transform: none !important;
+}
+
+/* Price alignment */
+[dir="rtl"] .price,
+[dir="rtl"] .product-price {
+  direction: ltr; /* Keep numbers LTR */
+  text-align: right;
+}
+
+/* Search results */
+[dir="rtl"] .search-result-item {
+  direction: rtl;
+}
+
+[dir="rtl"] .result-info {
+  text-align: right;
+}
+
+/* Summary rows in cart */
+[dir="rtl"] .summary-row {
+  direction: rtl;
+  justify-content: space-between;
+}
+
+/* Ensure proper spacing for RTL */
+[dir="rtl"] .mr-2 {
+  margin-right: 0;
+  margin-left: 0.5rem;
+}
+
+[dir="rtl"] .ml-2 {
+  margin-left: 0;
+  margin-right: 0.5rem;
+}
+
+/* Star ratings - keep LTR */
+[dir="rtl"] .stars,
+[dir="rtl"] .rating {
+  direction: ltr;
+}

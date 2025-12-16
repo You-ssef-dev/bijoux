@@ -6,7 +6,11 @@ import { Minus, Plus, Star } from 'lucide-react';
 import { motion } from 'framer-motion';
 import ProductCard from '../components/ProductCard';
 
+import { useTranslation } from 'react-i18next';
+
 const Product = () => {
+  const { t, i18n } = useTranslation();
+  const currentLang = i18n.language;
   const { id } = useParams();
   const product = products.find(p => p.id === parseInt(id));
   const { addToCart } = useCart();
@@ -18,8 +22,13 @@ const Product = () => {
   }, [id]);
 
   if (!product) {
-    return <div className="container section">Product not found</div>;
+    return <div className="container section">{t('product.not_found')}</div>;
   }
+
+  const productName = product.name[currentLang] || product.name['en'] || product.name;
+  const productDescription = product.description[currentLang] || product.description['en'] || product.description;
+  const productMaterial = product.material[currentLang] || product.material['en'] || product.material;
+  const productCategory = product.category[currentLang] || product.category['en'] || product.category;
 
   const handleAddToCart = () => {
     addToCart(product, quantity);
@@ -38,17 +47,17 @@ const Product = () => {
           <div className="product-gallery">
             <div className="main-image-container">
               {product.image ? (
-                <img src={product.image} alt={product.name} className="main-image" />
+                <img src={product.image} alt={productName} className="main-image" />
               ) : (
                 <div className="main-image-placeholder">
-                  <span>{product.name}</span>
+                  <span>{productName}</span>
                 </div>
               )}
             </div>
           </div>
 
           <div className="product-info-section">
-            <h1 className="product-title">{product.name}</h1>
+            <h1 className="product-title">{productName}</h1>
             <div className="product-price-row">
               <span className="price">${product.price.toLocaleString()}</span>
               <div className="reviews">
@@ -62,15 +71,15 @@ const Product = () => {
                     />
                   ))}
                 </div>
-                <span className="review-count">(12 reviews)</span>
+                <span className="review-count">({t('product.reviews', { count: 12 })})</span>
               </div>
             </div>
 
-            <p className="product-description">{product.description}</p>
+            <p className="product-description">{productDescription}</p>
 
             <div className="product-meta">
-              <p><strong>Material:</strong> {product.material}</p>
-              <p><strong>Category:</strong> {product.category}</p>
+              <p><strong>{t('product.material')}:</strong> {productMaterial}</p>
+              <p><strong>{t('product.category')}:</strong> {productCategory}</p>
             </div>
 
             <div className="add-to-cart-section">
@@ -80,7 +89,7 @@ const Product = () => {
                 <button onClick={() => setQuantity(quantity + 1)}><Plus size={16} /></button>
               </div>
               <button className="btn btn-primary add-btn" onClick={handleAddToCart}>
-                Add to Cart
+                {t('product.add_to_cart')}
               </button>
             </div>
           </div>
@@ -88,7 +97,7 @@ const Product = () => {
 
         {recommendations.length > 0 && (
           <div className="recommendations-section">
-            <h2 className="section-title">You May Also Like</h2>
+            <h2 className="section-title">{t('product.you_may_also_like')}</h2>
             <div className="product-grid">
               {recommendations.map(rec => (
                 <ProductCard key={rec.id} product={rec} />

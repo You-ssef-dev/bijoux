@@ -1,14 +1,17 @@
 import React from 'react';
 import WhatsAppButton from './WhatsAppButton';
 
+import { useTranslation } from 'react-i18next';
+
 const Newsletter = () => {
+  const { t } = useTranslation();
   return (
     <section className="section newsletter-section">
       <div className="container newsletter-container">
-        <h2>Ready to make it yours?</h2>
-        <p>Order directly via WhatsApp for a personalized shopping experience.</p>
+        <h2>{t('home.newsletter_title')}</h2>
+        <p>{t('home.newsletter_subtitle')}</p>
         <div className="whatsapp-cta-container">
-          <WhatsAppButton label="Order via WhatsApp" />
+          <WhatsAppButton variant="inline" label={t('home.whatsapp_cta')} />
         </div>
       </div>
 

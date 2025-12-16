@@ -1,10 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 
 const ProductCard = ({ product }) => {
+  const { t, i18n } = useTranslation();
+  const currentLang = i18n.language;
+  const name = product.name[currentLang] || product.name['en'] || product.name;
+  const category = product.category[currentLang] || product.category['en'] || product.category;
+  const price = product.price;
+
   return (
-    <Link to={`/product/${product.id}`} className="product-card">
+    <Link to={`/product/${product.id}`} className="product-card-link">
       <div className="product-image-container">
         {product.image ? (
           <img src={product.image} alt={product.name} className="product-image" />
@@ -23,12 +30,13 @@ const ProductCard = ({ product }) => {
         </motion.div>
       </div>
       <div className="product-info">
-        <h3 className="product-name">{product.name}</h3>
-        <p className="product-price">${product.price.toLocaleString()}</p>
+        <span className="product-category">{category}</span>
+        <h3 className="product-name">{name}</h3>
+        <p className="product-price">${price.toLocaleString()}</p>
       </div>
 
       <style>{`
-        .product-card {
+        .product-card-link {
           display: block;
           group: hover;
         }

@@ -1,33 +1,36 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-
-const collections = [
-  {
-    id: 'minimalist',
-    title: 'Minimalist',
-    image: '/images/necklaces/gold/gold-necklace.jpg',
-    color: '#EAEAEA'
-  },
-  {
-    id: 'vintage',
-    title: 'Vintage',
-    image: '/images/bracelets/silver/silver-cuff.jpg',
-    color: '#D8D8D0'
-  },
-  {
-    id: 'bridal',
-    title: 'Bridal',
-    image: '/images/rings/silver/diamond-ring.jpg',
-    color: '#F4F4F4'
-  }
-];
+import { useTranslation } from 'react-i18next';
 
 const FeaturedCollections = () => {
+  const { t } = useTranslation();
+
+  const collections = [
+    {
+      id: 'minimalist',
+      title: t('collections.minimalist'),
+      image: '/images/necklaces/gold/gold-necklace.jpg',
+      color: '#EAEAEA'
+    },
+    {
+      id: 'vintage',
+      title: t('collections.vintage'),
+      image: '/images/bracelets/silver/silver-cuff.jpg',
+      color: '#D8D8D0'
+    },
+    {
+      id: 'bridal',
+      title: t('collections.bridal'),
+      image: '/images/rings/silver/diamond-ring.jpg',
+      color: '#F4F4F4'
+    }
+  ];
+
   return (
     <section className="section collections-section">
       <div className="container">
-        <h2 className="section-title">Featured Collections</h2>
+        <h2 className="section-title">{t('home.featured_collections')}</h2>
         <div className="collections-grid">
           {collections.map((collection) => (
             <Link to={`/collections/${collection.id}`} key={collection.id} className="collection-card">

@@ -3,7 +3,10 @@ import { Link } from 'react-router-dom';
 import { Instagram, Facebook, Twitter } from 'lucide-react';
 import WhatsAppButton from './WhatsAppButton';
 
+import { useTranslation } from 'react-i18next';
+
 const Footer = () => {
+  const { t } = useTranslation();
   return (
     <footer className="footer">
       <div className="container">
@@ -11,7 +14,7 @@ const Footer = () => {
           <div className="footer-col">
             <h3 className="footer-logo">BIJOUX</h3>
             <p className="footer-text">
-              Timeless elegance, crafted for you. Discover our collection of fine jewelry designed to celebrate life's special moments.
+              {t('footer.about_text')}
             </p>
             <div className="social-links">
               <a href="https://www.instagram.com/bijoux" target="_blank" rel="noopener noreferrer" className="social-link" aria-label="Instagram">
@@ -27,33 +30,34 @@ const Footer = () => {
           </div>
 
           <div className="footer-col">
-            <h4>Shop</h4>
+            <h4>{t('nav.shop')}</h4>
             <ul className="footer-links">
-              <li><Link to="/shop">All Products</Link></li>
-              <li><Link to="/collections/new">New Arrivals</Link></li>
-              <li><Link to="/collections/bestsellers">Best Sellers</Link></li>
-              <li><Link to="/collections/bridal">Bridal</Link></li>
+              <li><Link to="/shop">{t('footer.all_products')}</Link></li>
+              <li><Link to="/collections/new">{t('footer.new_arrivals')}</Link></li>
+              <li><Link to="/collections/bestsellers">{t('footer.best_sellers')}</Link></li>
+              <li><Link to="/collections/bridal">{t('footer.bridal')}</Link></li>
             </ul>
           </div>
 
           <div className="footer-col">
-            <h4>Support</h4>
+            <h4>{t('footer.links')}</h4>
             <ul className="footer-links">
-              <li><Link to="/contact">Contact Us</Link></li>
-              <li><Link to="/shipping">Shipping & Returns</Link></li>
-              <li><Link to="/faq">FAQ</Link></li>
-              <li><Link to="/care">Jewelry Care</Link></li>
+              <li><Link to="/contact">{t('footer.contact')}</Link></li>
+              <li><Link to="/faq">{t('footer.faq')}</Link></li>
+              <li><Link to="/care">{t('footer.jewelry_care')}</Link></li>
+              <li><Link to="/privacy">{t('privacy.title')}</Link></li>
+              <li><Link to="/terms">{t('terms.title')}</Link></li>
             </ul>
           </div>
 
           <div className="footer-col">
-            <h4>Order via WhatsApp</h4>
-            <p className="footer-text">Shop with ease. Send us a message on WhatsApp to order your favorite pieces instantly.</p>
-            <WhatsAppButton label="Chat on WhatsApp" />
+            <h4>{t('footer.whatsapp_order_title')}</h4>
+            <p className="footer-text">{t('footer.whatsapp_order_text')}</p>
+            <WhatsAppButton label={t('footer.whatsapp_chat_label')} />
           </div>
         </div>
         <div className="footer-bottom">
-          <p>&copy; {new Date().getFullYear()} BIJOUX. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} BIJOUX. {t('footer.rights')}</p>
         </div>
       </div>
 

@@ -2,36 +2,38 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import SEO from '../components/SEO';
-
-const categories = [
-    {
-        id: 'gold-rings',
-        title: 'Gold Rings',
-        image: '/images/rings/silver/diamond-ring.jpg'
-    },
-    {
-        id: 'gold-necklaces',
-        title: 'Gold Necklaces',
-        image: '/images/necklaces/gold/gold-necklace.jpg'
-    },
-    {
-        id: 'gold-earrings',
-        title: 'Gold Earrings',
-        image: '/images/earrings/gold/gold-hoops.jpg'
-    },
-    {
-        id: 'gold-bracelets',
-        title: 'Gold Bracelets',
-        image: '/images/bracelets/gold/minimalist-gold-choker.jpg'
-    }
-];
+import { useTranslation } from 'react-i18next';
 
 const GoldCollection = () => {
+    const { t } = useTranslation();
+
+    const categories = [
+        {
+            id: 'gold-rings',
+            title: t('collections.gold_rings'),
+            image: '/images/rings/silver/diamond-ring.jpg'
+        },
+        {
+            id: 'gold-necklaces',
+            title: t('collections.gold_necklaces'),
+            image: '/images/necklaces/gold/gold-necklace.jpg'
+        },
+        {
+            id: 'gold-earrings',
+            title: t('collections.gold_earrings'),
+            image: '/images/earrings/gold/gold-hoops.jpg'
+        },
+        {
+            id: 'gold-bracelets',
+            title: t('collections.gold_bracelets'),
+            image: '/images/bracelets/gold/minimalist-gold-choker.jpg'
+        }
+    ];
     return (
         <div className="page gold-collection-page">
             <SEO
-                title="Gold Collection | Bijoux"
-                description="Explore our luxurious collection of 18k gold jewelry."
+                title={`${t('collections.gold_title')} | Bijoux`}
+                description={t('collections.gold_description')}
             />
 
             <div className="collection-hero">
@@ -45,14 +47,14 @@ const GoldCollection = () => {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8 }}
                     >
-                        Gold Collection
+                        {t('collections.gold_hero_title')}
                     </motion.h1>
                     <motion.p
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.2 }}
                     >
-                        Timeless elegance crafted in 18k gold. Discover rings, necklaces, earrings, and bracelets that radiate luxury.
+                        {t('collections.gold_hero_text')}
                     </motion.p>
                 </div>
             </div>
@@ -69,7 +71,7 @@ const GoldCollection = () => {
                                 <img src={category.image} alt={category.title} className="category-card-image" />
                                 <div className="category-card-overlay">
                                     <h2>{category.title}</h2>
-                                    <span className="explore-link">Explore &rarr;</span>
+                                    <span className="explore-link">{t('common.explore')} &rarr;</span>
                                 </div>
                             </motion.div>
                         </Link>

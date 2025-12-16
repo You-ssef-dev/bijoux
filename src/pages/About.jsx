@@ -1,100 +1,65 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
+import { Diamond, ShieldCheck, HeartHandshake } from 'lucide-react';
 import SEO from '../components/SEO';
 
 const About = () => {
+  const { t, i18n } = useTranslation();
+  const isRTL = i18n.dir() === 'rtl';
+  const targetRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
+    offset: ["start end", "end start"]
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
+
   return (
     <div className="page about-page">
       <SEO
-        title="Our Story | Bijoux"
-        description="Learn about the heritage, craftsmanship, and values behind Bijoux. Timeless elegance designed for the modern woman."
+        title={`${t('about.title')} | Bijoux`}
+        description={t('about.story_text')}
       />
 
       {/* Hero Section */}
-      <div className="about-hero">
+      <div className="about-hero" ref={targetRef}>
+        <div className="about-hero-overlay"></div>
         <div className="about-hero-content">
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 1, ease: "easeOut" }}
           >
-            The Art of Elegance
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            Crafting memories in gold and precious stones since 2024.
-          </motion.p>
+            <h1 className="hero-title">{t('about.title')}</h1>
+            <p className="hero-subtitle">{t('about.story_text').substring(0, 100)}...</p>
+          </motion.div>
         </div>
       </div>
 
-      {/* Story Section */}
+      {/* Intro / Story Section */}
       <section className="section story-section">
         <div className="container">
-          <div className="split-layout">
+          <div className={`split-layout ${isRTL ? 'reverse' : ''}`}>
             <motion.div
-              className="split-image-container"
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              className="split-image-wrapper"
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <img src="/images/hero.jpg" alt="Woman wearing Bijoux jewelry" className="split-image" />
+              <img src="/images/hero.jpg" alt="Our Story" className="split-image" />
+              <div className="image-decoration"></div>
             </motion.div>
             <motion.div
               className="split-content"
-              initial={{ opacity: 0, x: 50 }}
+              initial={{ opacity: 0, x: isRTL ? -50 : 50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
             >
-              <h2>Our Story</h2>
-              <p>
-                Bijoux was born from a simple yet profound desire: to create jewelry that transcends the fleeting nature of trends.
-                We believe that true luxury lies not just in the price tag, but in the story a piece tells and the feeling it evokes.
-              </p>
-              <p>
-                Founded by a team of passionate artisans and designers, our mission is to bring the timeless beauty of traditional
-                craftsmanship into the modern era. Each piece is a labor of love, designed to be a companion for life's most
-                cherished moments.
-              </p>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Craftsmanship Section */}
-      <section className="section craftsmanship-section">
-        <div className="container">
-          <div className="split-layout reverse">
-            <motion.div
-              className="split-image-container"
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
-              <img src="/images/bracelets/silver/silver-cuff.jpg" alt="Intricate silver craftsmanship" className="split-image" />
-            </motion.div>
-            <motion.div
-              className="split-content"
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
-              <h2>Master Craftsmanship</h2>
-              <p>
-                At the heart of Bijoux is an unwavering commitment to quality. We work with master jewelers who have honed their
-                skills over decades. From the initial sketch to the final polish, every step of the process is executed with
-                precision and care.
-              </p>
-              <p>
-                We use only the finest ethically sourced materials—18k gold, sterling silver, and conflict-free gemstones.
-                Our dedication to sustainability ensures that your jewelry is as kind to the earth as it is beautiful to wear.
-              </p>
+              <h2 className="section-heading">{t('about.story_title')}</h2>
+              <p className="section-text">{t('about.story_text')}</p>
             </motion.div>
           </div>
         </div>
@@ -103,70 +68,149 @@ const About = () => {
       {/* Values Section */}
       <section className="section values-section">
         <div className="container">
-          <h2 className="section-title">Our Values</h2>
+          <motion.div
+            className="values-header"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="section-heading centered">{t('about.values_title')}</h2>
+          </motion.div>
+
           <div className="values-grid">
-            <div className="value-card">
-              <div className="value-icon">✦</div>
-              <h3>Timeless Design</h3>
-              <p>We create pieces that defy trends, designed to be worn and loved for generations.</p>
-            </div>
-            <div className="value-card">
-              <div className="value-icon">✦</div>
-              <h3>Ethical Sourcing</h3>
-              <p>We are committed to transparency and responsibility in our supply chain.</p>
-            </div>
-            <div className="value-card">
-              <div className="value-icon">✦</div>
-              <h3>Uncompromised Quality</h3>
-              <p>We never cut corners. Every detail is scrutinized to ensure perfection.</p>
-            </div>
+            <ValueCard
+              icon={<Diamond size={32} />}
+              title={t('about.value1_title')}
+              text={t('about.value1_text')}
+              delay={0}
+            />
+            <ValueCard
+              icon={<ShieldCheck size={32} />}
+              title={t('about.value2_title')}
+              text={t('about.value2_text')}
+              delay={0.2}
+            />
+            <ValueCard
+              icon={<HeartHandshake size={32} />}
+              title={t('about.value3_title')}
+              text={t('about.value3_text')}
+              delay={0.4}
+            />
           </div>
         </div>
       </section>
 
+      {/* Craftsmanship Parallax Section */}
+      <section className="section craft-section">
+        <div className="craft-background-container">
+          <motion.div style={{ y }} className="craft-background"></motion.div>
+          <div className="craft-overlay"></div>
+        </div>
+
+        {/* Floating Diamond Element */}
+        <motion.div
+          className="floating-diamond-container"
+          animate={{
+            y: [0, -20, 0],
+            rotate: [0, 5, -5, 0]
+          }}
+          transition={{
+            duration: 6,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        >
+          <img src="/images/floating_diamond.png" alt="Floating Diamond" className="floating-diamond" />
+        </motion.div>
+
+        <div className="container craft-content-container">
+          <motion.div
+            className="craft-content glass-box"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <h2 className="section-heading">{t('about.craft_title')}</h2>
+            <p className="section-text">{t('about.craft_text')}</p>
+          </motion.div>
+        </div>
+      </section>
+
       <style>{`
+        /* About Page Global Styles */
+        .about-page {
+          overflow-x: hidden;
+        }
+
+        /* Hero Section */
         .about-hero {
-          height: 60vh;
+          height: 85vh;
+          position: relative;
           background-image: url('/images/about_hero.jpg');
           background-size: cover;
           background-position: center;
-          background-color: #1A1A1A;
-          color: #FFFFFF;
+          background-attachment: fixed; /* Parallax effect */
           display: flex;
           align-items: center;
           justify-content: center;
           text-align: center;
-          position: relative;
-          overflow: hidden;
+          color: white;
         }
-        
-        .about-hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
+
+        .about-hero-overlay {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.7));
+          z-index: 1;
         }
 
         .about-hero-content {
-            position: relative;
-            z-index: 2;
-            padding: 0 2rem;
+          position: relative;
+          z-index: 2;
+          max-width: 800px;
+          padding: 2rem;
         }
 
-        .about-hero h1 {
-          font-size: 4rem;
-          margin-bottom: 1.5rem;
+        .hero-title {
           font-family: var(--font-serif);
+          font-size: clamp(3rem, 8vw, 5rem);
+          margin-bottom: 1.5rem;
+          line-height: 1.1;
+          letter-spacing: -0.02em;
+          text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
         }
 
-        .about-hero p {
-          font-size: 1.2rem;
-          max-width: 600px;
-          margin: 0 auto;
+        .hero-subtitle {
+          font-size: 1.25rem;
+          letter-spacing: 0.05em;
           opacity: 0.9;
+          font-weight: 300;
+        }
+
+        /* Typography */
+        .section-heading {
+          font-family: var(--font-serif);
+          font-size: 2.5rem;
+          margin-bottom: 1.5rem;
+          color: var(--color-text);
+        }
+        
+        .section-heading.centered {
+          text-align: center;
+          margin-bottom: 4rem;
+        }
+
+        .section-text {
+          font-size: 1.1rem;
+          line-height: 1.8;
+          color: var(--color-secondary);
+        }
+
+        /* Story Section - Split Layout */
+        .story-section {
+          padding: 8rem 0;
         }
 
         .split-layout {
@@ -175,104 +219,216 @@ const About = () => {
           gap: 6rem;
           align-items: center;
         }
-
-        .split-layout.reverse {
-            direction: rtl;
-        }
         
-        .split-layout.reverse .split-content {
-            direction: ltr;
+        .split-layout.reverse {
+            /* Handled by RTL specific logic if needed, but flex/grid order works naturally */
         }
 
-        .split-image-container {
-          width: 100%;
-          height: 600px;
-          overflow: hidden;
+        .split-image-wrapper {
           position: relative;
         }
 
         .split-image {
           width: 100%;
+          border-radius: 4px; /* Slight softening */
+          box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .image-decoration {
+          position: absolute;
+          top: -20px;
+          left: -20px;
+          width: 100%;
           height: 100%;
-          object-fit: cover;
+          border: 2px solid var(--color-primary);
+          z-index: -1;
+          opacity: 0.3;
         }
 
-        .split-content h2 {
-          font-size: 2.5rem;
-          margin-bottom: 2rem;
-          color: var(--color-text);
-        }
-
-        .split-content p {
-          color: var(--color-secondary);
-          margin-bottom: 1.5rem;
-          font-size: 1.1rem;
-          line-height: 1.8;
-        }
-
+        /* Values Section */
         .values-section {
-          background-color: var(--color-card-bg);
-          padding: 8rem 0;
-          border-top: 1px solid var(--color-border);
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 4rem;
+          background-color: var(--color-card-bg); /* Use theme bg */
+          padding: 6rem 0;
         }
 
         .values-grid {
           display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 4rem;
-          text-align: center;
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          gap: 3rem;
         }
 
-        .value-icon {
-            font-size: 2rem;
-            color: var(--color-primary);
-            margin-bottom: 1.5rem;
+        .value-card {
+           text-align: center;
+           padding: 2.5rem;
+           background: var(--color-background);
+           border: 1px solid var(--color-border);
+           transition: transform 0.3s ease, box-shadow 0.3s ease;
+           border-radius: 8px;
         }
 
-        .value-card h3 {
-          font-size: 1.2rem;
-          margin-bottom: 1rem;
-          text-transform: uppercase;
-          letter-spacing: 0.1em;
+        .value-card:hover {
+           transform: translateY(-10px);
+           box-shadow: 0 15px 30px rgba(0,0,0,0.05);
+           border-color: var(--color-primary);
         }
 
-        .value-card p {
-          color: var(--color-secondary);
-          line-height: 1.6;
+        .value-icon-wrapper {
+          width: 70px;
+          height: 70px;
+          border-radius: 50%;
+          background-color: var(--color-card-bg);
+          border: 1px solid var(--color-border);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 0 auto 1.5rem;
+          color: var(--color-primary);
+          transition: all 0.3s ease;
         }
 
+        .value-card:hover .value-icon-wrapper {
+           background-color: var(--color-primary);
+           color: white;
+           border-color: var(--color-primary);
+        }
+
+        .value-title {
+           font-family: var(--font-serif);
+           font-size: 1.25rem;
+           margin-bottom: 1rem;
+        }
+
+        /* Craftsmanship Section */
+        .craft-section {
+          position: relative;
+          height: 700px;
+          display: flex;
+          align-items: center;
+          overflow: hidden;
+        }
+
+        .craft-background-container {
+           position: absolute;
+           inset: 0;
+           z-index: -1;
+        }
+        
+        .craft-background {
+           background-image: url('/images/bracelets/silver/silver-cuff.jpg'); /* Or another detail shot */
+           background-size: cover;
+           background-position: center;
+           height: 120%; /* For parallax movement */
+           width: 100%;
+        }
+
+        .craft-overlay {
+           position: absolute;
+           inset: 0;
+           background: rgba(0,0,0,0.5);
+        }
+
+        .craft-content-container {
+           position: relative;
+           z-index: 10;
+           display: flex;
+           justify-content: center; /* Center horizontally */
+           width: 100%;
+        }
+        
+        .floating-diamond-container {
+            position: absolute;
+            top: 15%;
+            right: 15%;
+            z-index: 5;
+            width: 150px;
+            pointer-events: none;
+            filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.4));
+        }
+        
+        .floating-diamond {
+            width: 100%;
+            height: auto;
+        }
+        
+        /* RTL support for floating element */
+        :global([dir="rtl"]) .floating-diamond-container {
+            right: auto;
+            left: 15%;
+        }
+
+        .glass-box {
+           background: rgba(255, 255, 255, 0.1);
+           backdrop-filter: blur(12px);
+           -webkit-backdrop-filter: blur(12px);
+           padding: 4rem;
+           max-width: 700px;
+           text-align: center;
+           border: 1px solid rgba(255, 255, 255, 0.2);
+           box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+           border-radius: 16px;
+           color: white;
+        }
+        
+        .glass-box .section-heading {
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .glass-box .section-text {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2rem;
+        }
+        
+        /* Dark mode overrides for glass box */
+        :global([data-theme="dark"]) .glass-box {
+           background: rgba(0, 0, 0, 0.4);
+           border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive Adjustments */
         @media (max-width: 768px) {
-          .about-hero h1 {
-            font-size: 2.5rem;
-          }
-          
           .split-layout {
             grid-template-columns: 1fr;
-            gap: 3rem;
           }
           
-          .split-layout.reverse {
-              direction: ltr;
+          .floating-diamond-container {
+              width: 80px;
+              top: 10%;
+              right: 5%;
           }
           
-          .split-image-container {
-              height: 400px;
+          .image-decoration {
+             display: none;
           }
-
-          .values-grid {
-            grid-template-columns: 1fr;
-            gap: 3rem;
+           
+          .hero-title {
+             font-size: 3rem;
+          }
+          
+          .glass-box {
+             padding: 2rem;
+             margin: 0 1rem;
           }
         }
       `}</style>
     </div>
   );
 };
+
+const ValueCard = ({ icon, title, text, delay }) => (
+  <motion.div
+    className="value-card"
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.5, delay }}
+  >
+    <div className="value-icon-wrapper">
+      {icon}
+    </div>
+    <h3 className="value-title">{title}</h3>
+    <p>{text}</p>
+  </motion.div>
+);
 
 export default About;

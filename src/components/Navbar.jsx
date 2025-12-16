@@ -4,10 +4,13 @@ import { ShoppingBag, Menu, X, Search, Sun, Moon } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCart } from '../context/CartContext';
 import { useTheme } from '../context/ThemeContext';
+import { useTranslation } from 'react-i18next';
+import LanguageSwitcher from './LanguageSwitcher';
 import { products } from '../data/products';
 import '../index.css';
 
 const Navbar = () => {
+  const { t } = useTranslation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
@@ -65,10 +68,10 @@ const Navbar = () => {
   };
 
   const navLinks = [
-    { name: 'Home', path: '/' },
-    { name: 'Shop', path: '/shop' },
-    { name: 'Collections', path: '/collections' },
-    { name: 'About', path: '/about' },
+    { name: t('nav.home'), path: '/' },
+    { name: t('nav.shop'), path: '/shop' },
+    { name: t('nav.collections'), path: '/collections' },
+    { name: t('nav.about'), path: '/about' },
   ];
 
   return (
@@ -106,7 +109,7 @@ const Navbar = () => {
                 <Search size={18} className="search-icon" />
                 <input
                   type="text"
-                  placeholder="Search..."
+                  placeholder={t('nav.search_placeholder')}
                   value={searchQuery}
                   onChange={handleSearchInput}
                   onFocus={() => searchQuery.trim().length > 0 && setShowDropdown(true)}
@@ -141,7 +144,7 @@ const Navbar = () => {
                     className="view-all-results"
                     onClick={handleSearchSubmit}
                   >
-                    View all results for "{searchQuery}"
+                    {t('nav.view_all_results', { query: searchQuery })}
                   </div>
                 </motion.div>
               )}
@@ -151,6 +154,7 @@ const Navbar = () => {
           <button className="icon-btn" onClick={toggleTheme} aria-label="Toggle theme">
             {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
           </button>
+          <LanguageSwitcher />
           <Link to="/cart" className="icon-btn cart-btn">
             <ShoppingBag size={20} />
             <span className="cart-count">{cartCount}</span>

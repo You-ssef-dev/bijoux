@@ -8,11 +8,13 @@ import About from './pages/About';
 import Cart from './pages/Cart';
 import Collections from './pages/Collections';
 import Contact from './pages/Contact';
-import Shipping from './pages/Shipping';
 import FAQ from './pages/FAQ';
 import Care from './pages/Care';
 import GoldCollection from './pages/GoldCollection';
 import SilverCollection from './pages/SilverCollection';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/TermsOfService';
+import NotFound from './pages/NotFound';
 
 import { CartProvider } from './context/CartContext';
 import { ThemeProvider } from './context/ThemeContext';
@@ -33,10 +35,13 @@ function App() {
               <Route path="/collections/:category" element={<Collections />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
-              <Route path="/shipping" element={<Shipping />} />
               <Route path="/faq" element={<FAQ />} />
               <Route path="/care" element={<Care />} />
               <Route path="/cart" element={<Cart />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/privacy" element={<PrivacyPolicy />} />
+              <Route path="/terms" element={<TermsOfService />} />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </Layout>
         </Router>

@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Star } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { products } from '../data/products';
 
 const BestSellers = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const { t, i18n } = useTranslation();
+  const currentLang = i18n.language;
 
   // Select best sellers (first 6 products)
   const bestSellers = products.slice(0, 6);
@@ -26,7 +29,7 @@ const BestSellers = () => {
     <section className="section best-sellers-section">
       <div className="container">
         <div className="section-header">
-          <h2 className="section-title">Best Sellers</h2>
+          <h2 className="section-title">{t('home.best_sellers')}</h2>
           <div className="carousel-controls">
             <button
               className="carousel-btn"
@@ -69,10 +72,10 @@ const BestSellers = () => {
                         className="bestseller-image"
                       />
                     )}
-                    <div className="bestseller-badge">Best Seller</div>
+                    <div className="bestseller-badge">{t('shop.best_seller')}</div>
                   </div>
                   <div className="bestseller-info">
-                    <h3>{product.name}</h3>
+                    <h3>{product.name[currentLang] || product.name['en'] || product.name}</h3>
                     <div className="bestseller-rating">
                       {[...Array(5)].map((_, i) => (
                         <Star

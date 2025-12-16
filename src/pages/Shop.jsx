@@ -5,12 +5,18 @@ import { products } from '../data/products';
 import { Filter, ChevronDown } from 'lucide-react';
 import SEO from '../components/SEO';
 
+import { useTranslation } from 'react-i18next';
+
 const Shop = () => {
+    const { t, i18n } = useTranslation();
+    const currentLang = i18n.language;
     const [searchParams] = useSearchParams();
     const searchQuery = searchParams.get('search') || '';
+    const categoryParam = searchParams.get('category');
+    const materialParam = searchParams.get('material');
 
-    const [selectedCategory, setSelectedCategory] = useState('All');
-    const [selectedMaterial, setSelectedMaterial] = useState('All');
+    const [selectedCategory, setSelectedCategory] = useState(categoryParam || 'All');
+    const [selectedMaterial, setSelectedMaterial] = useState(materialParam || 'All');
     const [priceRange, setPriceRange] = useState('All');
 
     const categories = ['All', 'Necklaces', 'Earrings', 'Rings', 'Bracelets'];
@@ -20,11 +26,15 @@ const Shop = () => {
     const filteredProducts = useMemo(() => {
         return products.filter(product => {
             // Search filter - partial or exact match on product name
+            const productName = product.name[currentLang] || product.name['en'] || '';
             const searchMatch = !searchQuery ||
-                product.name.toLowerCase().includes(searchQuery.toLowerCase());
+                productName.toLowerCase().includes(searchQuery.toLowerCase());
 
-            const categoryMatch = selectedCategory === 'All' || product.category === selectedCategory;
-            const materialMatch = selectedMaterial === 'All' || product.material === selectedMaterial;
+            const productCategory = product.category?.en || product.category;
+            const productMaterial = product.material?.en || product.material;
+
+            const categoryMatch = selectedCategory === 'All' || productCategory === selectedCategory;
+            const materialMatch = selectedMaterial === 'All' || productMaterial === selectedMaterial;
             let priceMatch = true;
             if (priceRange === 'Under $500') priceMatch = product.price < 500;
             else if (priceRange === '$500 - $1000') priceMatch = product.price >= 500 && product.price <= 1000;
@@ -32,25 +42,25 @@ const Shop = () => {
 
             return searchMatch && categoryMatch && materialMatch && priceMatch;
         });
-    }, [searchQuery, selectedCategory, selectedMaterial, priceRange]);
+    }, [searchQuery, selectedCategory, selectedMaterial, priceRange, currentLang]);
 
     return (
         <div className="page shop-page">
             <SEO
-                title="Shop All Jewelry | Bijoux"
-                description="Browse our complete collection of luxury jewelry. Filter by category, material, and price to find your perfect piece."
-                keywords="shop jewelry, buy jewelry online, luxury jewelry collection, gold jewelry, silver jewelry"
+                title={`${t('shop.title')} | Bijoux`}
+                description={t('shop.description')}
+                keywords={t('shop.keywords')}
             />
             <div className="container section">
                 <div className="shop-header">
-                    <h1>{searchQuery ? `Search Results for "${searchQuery}"` : 'Shop All'}</h1>
-                    <p>{filteredProducts.length} Product{filteredProducts.length !== 1 ? 's' : ''}</p>
+                    <h1>{searchQuery ? `${t('shop.search_results')} "${searchQuery}"` : t('shop.shop_all')}</h1>
+                    <p>{filteredProducts.length} {filteredProducts.length !== 1 ? t('shop.products') : t('shop.product')}</p>
                 </div>
 
                 <div className="shop-layout">
                     <aside className="filters-sidebar">
                         <div className="filter-group">
-                            <h3>Category</h3>
+                            <h3>{t('shop.category')}</h3>
                             <ul>
                                 {categories.map(cat => (
                                     <li key={cat}>
@@ -58,14 +68,14 @@ const Shop = () => {
                                             className={selectedCategory === cat ? 'active' : ''}
                                             onClick={() => setSelectedCategory(cat)}
                                         >
-                                            {cat}
+                                            {cat === 'All' ? t('shop.all') : t(`shop.categories.${cat.toLowerCase()}`)}
                                         </button>
                                     </li>
                                 ))}
                             </ul>
                         </div>
                         <div className="filter-group">
-                            <h3>Material</h3>
+                            <h3>{t('shop.material')}</h3>
                             <ul>
                                 {materials.map(mat => (
                                     <li key={mat}>
@@ -73,14 +83,14 @@ const Shop = () => {
                                             className={selectedMaterial === mat ? 'active' : ''}
                                             onClick={() => setSelectedMaterial(mat)}
                                         >
-                                            {mat}
+                                            {mat === 'All' ? t('shop.all') : t(`shop.materials.${mat.toLowerCase()}`)}
                                         </button>
                                     </li>
                                 ))}
                             </ul>
                         </div>
                         <div className="filter-group">
-                            <h3>Price</h3>
+                            <h3>{t('shop.price')}</h3>
                             <ul>
                                 {prices.map(price => (
                                     <li key={price}>

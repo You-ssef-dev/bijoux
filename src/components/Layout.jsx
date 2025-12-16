@@ -1,25 +1,31 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import { useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const Layout = ({ children }) => {
-    const { pathname } = useLocation();
+  const { pathname } = useLocation();
+  const { i18n } = useTranslation();
 
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, [pathname]);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
-    return (
-        <div className="layout">
-            <Navbar />
-            <main className="main-content">
-                {children}
-            </main>
-            <Footer />
-            <style>{`
-        .layout {
+  useEffect(() => {
+    document.dir = i18n.language === 'ar' ? 'rtl' : 'ltr';
+    document.documentElement.lang = i18n.language;
+  }, [i18n.language]);
+
+  return (
+    <div className="app-container">
+      <Navbar />
+      <main className="main-content">
+        {children}
+      </main>
+      <Footer />
+      <style>{`
+        .app-container {
           display: flex;
           flex-direction: column;
           min-height: 100vh;
@@ -28,8 +34,8 @@ const Layout = ({ children }) => {
           flex: 1;
         }
       `}</style>
-        </div>
-    );
+    </div>
+  );
 };
 
 export default Layout;

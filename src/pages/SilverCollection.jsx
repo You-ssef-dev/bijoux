@@ -2,36 +2,38 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import SEO from '../components/SEO';
-
-const categories = [
-    {
-        id: 'silver-rings',
-        title: 'Silver Rings',
-        image: '/images/bracelets/silver/silver-cuff.jpg'
-    },
-    {
-        id: 'silver-necklaces',
-        title: 'Silver Necklaces',
-        image: '/images/bracelets/silver/silver-cuff.jpg'
-    },
-    {
-        id: 'silver-earrings',
-        title: 'Silver Earrings',
-        image: '/images/bracelets/silver/silver-cuff.jpg'
-    },
-    {
-        id: 'silver-bracelets',
-        title: 'Silver Bracelets',
-        image: '/images/bracelets/silver/silver-cuff.jpg'
-    }
-];
+import { useTranslation } from 'react-i18next';
 
 const SilverCollection = () => {
+    const { t } = useTranslation();
+
+    const categories = [
+        {
+            id: 'silver-rings',
+            title: t('collections.silver_rings'),
+            image: '/images/bracelets/silver/silver-cuff.jpg'
+        },
+        {
+            id: 'silver-necklaces',
+            title: t('collections.silver_necklaces'),
+            image: '/images/bracelets/silver/silver-cuff.jpg'
+        },
+        {
+            id: 'silver-earrings',
+            title: t('collections.silver_earrings'),
+            image: '/images/bracelets/silver/silver-cuff.jpg'
+        },
+        {
+            id: 'silver-bracelets',
+            title: t('collections.silver_bracelets'),
+            image: '/images/bracelets/silver/silver-cuff.jpg'
+        }
+    ];
     return (
         <div className="page silver-collection-page">
             <SEO
-                title="Silver Collection | Bijoux"
-                description="Discover our stunning collection of sterling silver jewelry."
+                title={`${t('collections.silver_title')} | Bijoux`}
+                description={t('collections.silver_description')}
             />
 
             <div className="collection-hero">
@@ -45,14 +47,14 @@ const SilverCollection = () => {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8 }}
                     >
-                        Silver Collection
+                        {t('collections.silver_hero_title')}
                     </motion.h1>
                     <motion.p
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.2 }}
                     >
-                        Cool, crisp, and contemporary. Explore our range of sterling silver rings, necklaces, earrings, and bracelets.
+                        {t('collections.silver_hero_text')}
                     </motion.p>
                 </div>
             </div>
@@ -69,7 +71,7 @@ const SilverCollection = () => {
                                 <img src={category.image} alt={category.title} className="category-card-image" />
                                 <div className="category-card-overlay">
                                     <h2>{category.title}</h2>
-                                    <span className="explore-link">Explore &rarr;</span>
+                                    <span className="explore-link">{t('common.explore')} &rarr;</span>
                                 </div>
                             </motion.div>
                         </Link>

@@ -1,72 +1,64 @@
 import React from 'react';
 import SEO from '../components/SEO';
 
+import { useTranslation } from 'react-i18next';
+
 const Care = () => {
+    const { t } = useTranslation();
+
     return (
         <div className="page care-page">
             <SEO
-                title="Jewelry Care Guide | Bijoux"
-                description="Tips and guides on how to care for your fine jewelry to ensure it lasts a lifetime."
+                title={`${t('care.title')} | Bijoux`}
+                description={t('care.subtitle')}
             />
 
             <div className="container section">
                 <div className="care-header">
-                    <h1>Jewelry Care Guide</h1>
-                    <p>Preserve the beauty of your Bijoux pieces for generations to come.</p>
+                    <h1>{t('care.title')}</h1>
+                    <p>{t('care.subtitle')}</p>
                 </div>
 
                 <div className="care-grid">
                     <div className="care-card">
                         <div className="care-icon">✨</div>
-                        <h2>General Care</h2>
-                        <p>
-                            Remove jewelry before swimming, bathing, or exercising. Avoid contact with perfumes, lotions, and household chemicals,
-                            as these can tarnish metals and damage gemstones.
-                        </p>
+                        <h2>{t('care.general_title')}</h2>
+                        <p>{t('care.general_text')}</p>
                     </div>
 
                     <div className="care-card">
                         <div className="care-icon">🧼</div>
-                        <h2>Cleaning</h2>
-                        <p>
-                            Clean your gold and diamond jewelry gently with warm water and a mild soap. Use a soft brush to remove dirt.
-                            For pearls, simply wipe them with a soft, damp cloth after wearing.
-                        </p>
+                        <h2>{t('care.cleaning_title')}</h2>
+                        <p>{t('care.cleaning_text')}</p>
                     </div>
 
                     <div className="care-card">
                         <div className="care-icon">📦</div>
-                        <h2>Storage</h2>
-                        <p>
-                            Store each piece separately in its original box or a soft pouch to prevent scratching and tangling.
-                            Keep in a cool, dry place away from direct sunlight.
-                        </p>
+                        <h2>{t('care.storage_title')}</h2>
+                        <p>{t('care.storage_text')}</p>
                     </div>
 
                     <div className="care-card">
                         <div className="care-icon">🔍</div>
-                        <h2>Maintenance</h2>
-                        <p>
-                            We recommend having your jewelry professionally inspected and cleaned once a year.
-                            Check clasps and settings regularly to ensure stones are secure.
-                        </p>
+                        <h2>{t('care.maintenance_title')}</h2>
+                        <p>{t('care.maintenance_text')}</p>
                     </div>
                 </div>
 
                 <div className="material-guide">
-                    <h2>Material Specifics</h2>
+                    <h2>{t('care.material_guide_title')}</h2>
                     <div className="material-row">
                         <div className="material-col">
-                            <h3>Gold</h3>
-                            <p>Gold is a durable metal but can scratch. Buff gently with a polishing cloth to restore shine.</p>
+                            <h3>{t('care.gold_title')}</h3>
+                            <p>{t('care.gold_text')}</p>
                         </div>
                         <div className="material-col">
-                            <h3>Silver</h3>
-                            <p>Sterling silver naturally tarnishes over time. Use a silver polishing cloth to remove tarnish.</p>
+                            <h3>{t('care.silver_title')}</h3>
+                            <p>{t('care.silver_text')}</p>
                         </div>
                         <div className="material-col">
-                            <h3>Pearls</h3>
-                            <p>Pearls are organic and delicate. They need moisture from the air, so wear them often!</p>
+                            <h3>{t('care.pearls_title')}</h3>
+                            <p>{t('care.pearls_text')}</p>
                         </div>
                     </div>
                 </div>
